@@ -286,7 +286,7 @@ tethering_check_ap(
 
         if (!i->valid) {
             all_valid = FALSE;
-        } else if (i->caps.modes & GSUPPLICANT_INTERFACE_CAPS_MODES_AP) {
+        } else if (i->caps.modes & GSUPPLICANT_INTERFACE_CAPS_MODES_AP && (strncmp(i->ifname, "ap0", 3)==0)) {
             ap_ifname = i->ifname;
         }
     }
