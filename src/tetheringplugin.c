@@ -279,10 +279,14 @@ tethering_check_ap(
     const char* ap_ifname = NULL;
     gboolean all_valid = TRUE;
 
+    DBG("start func");
+
     g_hash_table_iter_init(&it, ifaces);
     while (g_hash_table_iter_next(&it, NULL, &value) && all_valid) {
         TetheringWaitInterface* iface = value;
         GSupplicantInterface* i = iface->supplicant_interface;
+
+        DBG("looping interfaces %i %s", i->valid, i->ifname);
 
         if (!i->valid) {
             all_valid = FALSE;
@@ -290,6 +294,8 @@ tethering_check_ap(
             ap_ifname = i->ifname;
         }
     }
+
+    DBG("%i %s", all_valid, ap_ifname);
 
     if (all_valid && ap_ifname) {
         /* Bring down non-AP interfaces */
@@ -309,8 +315,11 @@ tethering_check_ap(
                 }
             }
         }
+        DBG("end func true");
         return TRUE;
     } else {
+        DBG("end func false");
+
         return FALSE;
     }
 }
