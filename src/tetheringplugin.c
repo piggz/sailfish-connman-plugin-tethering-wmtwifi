@@ -360,7 +360,7 @@ tethering_changed_notify(
     }
 }
 
-struct connman_notifier tethering_plugin_notifier = {
+static const struct connman_notifier tethering_plugin_notifier = {
     .name = "wmtWifi tethering notifier",
     .tethering_changed = tethering_changed_notify
 };
